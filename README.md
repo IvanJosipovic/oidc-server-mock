@@ -24,7 +24,7 @@ services:
     container_name: oidc-server-mock
     image: ghcr.io/soluto/oidc-server-mock:latest
     ports:
-      - '4011:80'
+      - '4011:8080'
     environment:
       ASPNETCORE_ENVIRONMENT: Development
       SERVER_OPTIONS_INLINE: |
@@ -213,7 +213,7 @@ ENV ASPNET_SERVICES_OPTIONS_INLINE="{ \
 }"
 
 # Expose the port
-EXPOSE 80
+EXPOSE 8080
 
 # Command to run the application
 CMD ["dotnet", "Soluto.OidcServerMock.dll"]
@@ -281,14 +281,14 @@ To use `https` protocol with the server just add the following environment varia
 
 ```yaml
 environment:
-  ASPNETCORE_URLS: https://+:443;http://+:80
+  ASPNETCORE_URLS: https://+:8443;http://+:8080
   ASPNETCORE_Kestrel__Certificates__Default__Password: <password for pfx file>
   ASPNETCORE_Kestrel__Certificates__Default__Path: /path/to/pfx/file
 volumes:
   - ./local/path/to/pfx/file:/path/to/pfx/file:ro
 ports:
-  - 8080:80
-  - 8443:443
+  - 8080:8080
+  - 8443:8443
 ```
 
 ---
